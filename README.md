@@ -1,6 +1,6 @@
-# Local advancer Guide Independent Service Provide Website.
+# Local advancer Guide (Independent Service Provide Website.)
 
-Source Code Link [Click Here](https://github.com/programming-hero-web-course-4/independent-service-provider-ahmmedrasel-dev.git).
+To See Source Code: [Click Here](https://github.com/programming-hero-web-course-4/independent-service-provider-ahmmedrasel-dev).
 
 ## Available Scripts
 
