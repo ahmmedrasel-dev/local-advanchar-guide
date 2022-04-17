@@ -9,6 +9,7 @@ import Register from './Pages/LoginRegister/Register/Register';
 import Notfound from './Pages/NotFound/Notfound';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from './Pages/Common/Header/Header';
+import Footer from './Pages/Common/Footer/Footer';
 
 function App() {
   return (
@@ -17,13 +18,14 @@ function App() {
       <Routes>
         <Route path='/' element={<Home></Home>}></Route>
         <Route path='/home' element={<Home></Home>}></Route>
-        <Route path='/services' element={<Services></Services>}></Route>
+        <Route path='services' element={<Services></Services>}></Route>
         <Route path='/about' element={<About></About>}></Route>
         <Route path='/checkout' element={<Checkout></Checkout>}></Route>
         <Route path='/login' element={<Login></Login>}></Route>
         <Route path='/register' element={<Register></Register>}></Route>
         <Route path='*' element={<Notfound></Notfound>}></Route>
       </Routes>
+      <Footer></Footer>
     </>
   );
 }

@@ -1,10 +1,17 @@
 import React from 'react';
+import { Col, Row } from 'react-bootstrap';
 
 const Footer = () => {
+  const today = new Date();
+  const year = today.getFullYear();
   return (
-    <div>
-      <h1>This is Footer Component</h1>
-    </div>
+    <footer>
+      <Row>
+        <Col className='text-center bg-dark p-4'>
+          <strong className='text-white'>&copy; {year} | All rights reserved. </strong>
+        </Col>
+      </Row>
+    </footer>
   );
 };
 
