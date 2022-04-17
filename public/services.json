@@ -4,41 +4,47 @@
     "picture": "https://i.ibb.co/GkTkSVZ/river.png",
     "price": 228,
     "services": "River guides",
-    "description": "Trips can last from a few hours to multiple weeks"
+    "description": "Trips can last from a few hours to multiple weeks",
+    "quantity": 0
   },
   {
     "id": "625ac373c1a701c2de8bc944",
     "picture": "https://i.ibb.co/xD4KNt9/climing.png",
     "price": 423,
     "services": "Climbing guides",
-    "description": "Provide guide with equipment to climb safely in an area"
+    "description": "Provide guide with equipment to climb safely in an area",
+    "quantity": 0
   },
   {
     "id": "625ac373d0be496a6ee5c97b",
     "picture": "https://i.ibb.co/9nVGKv3/hiking.png",
     "price": 236,
     "services": "Hiking guides",
-    "description": "Help tourists navigate difficult terrain like glaciers, mountain passe."
+    "description": "Help tourists navigate difficult terrain like glaciers, mountain passe.",
+    "quantity": 0
   },
   {
     "id": "625ac373d24a6b6fa66114af",
     "picture": "https://i.ibb.co/p42Lz8N/snowball.png",
     "price": 123,
     "services": "Snowmobile guides",
-    "description": "Assist guests by providing snowmobiles and access to snowmobiling areas."
+    "description": "Assist guests by providing snowmobiles and access to snowmobiling areas.",
+    "quantity": 0
   },
   {
     "id": "625ac37378a704384d51b1ce",
     "picture": "https://i.ibb.co/zfqxzQv/fising.png",
     "price": 260,
     "services": "Fishing guides",
-    "description": "Assist guests with instructional help, supplies and fish cleaning."
+    "description": "Assist guests with instructional help, supplies and fish cleaning.",
+    "quantity": 0
   },
   {
     "id": "625ac3730fd37223addf9e30",
     "picture": "https://i.ibb.co/1XjV1g7/nature.png",
     "price": 230,
     "services": "Nature guide",
-    "description": "Usually guide tourists through outdoor areas of interest."
+    "description": "Usually guide tourists through outdoor areas of interest.",
+    "quantity": 0
   }
 ]

@@ -2,8 +2,9 @@ import React from 'react';
 import { Col } from 'react-bootstrap';
 import './ServiceItem.css';
 
-const ServicesItem = ({ servicesItem }) => {
+const ServicesItem = ({ servicesItem, addedBooking }) => {
   const { services, price, description, picture } = servicesItem;
+
   return (
     <Col md={4}>
       <div className="service-item">
@@ -15,7 +16,7 @@ const ServicesItem = ({ servicesItem }) => {
           <h4>${price}</h4>
         </div>
         <p>{description}</p>
-        <button className='btn btn-primary w-100'>Booking</button>
+        <button className='btn btn-primary w-100' onClick={() => addedBooking(servicesItem)}>Booking</button>
       </div>
     </Col>
   );

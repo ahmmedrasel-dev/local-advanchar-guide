@@ -10,8 +10,8 @@ import Notfound from './Pages/NotFound/Notfound';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from './Pages/Common/Header/Header';
 import Footer from './Pages/Common/Footer/Footer';
-import RequireAuth from './Pages/RequireAuth/RequireAuth';
 import RequiredAuth from './Pages/RequireAuth/RequireAuth';
+import { ToastContainer } from 'react-toastify';
 
 function App() {
   return (
@@ -31,6 +31,7 @@ function App() {
         <Route path='/register' element={<Register></Register>}></Route>
         <Route path='*' element={<Notfound></Notfound>}></Route>
       </Routes>
+      <ToastContainer />
       <Footer></Footer>
     </>
   );

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
-import { useCreateUserWithEmailAndPassword, useSignInWithFacebook, useSignInWithGithub, useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import { useCreateUserWithEmailAndPassword, useSignInWithFacebook, useSignInWithGithub, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth';
 import auth from '../../../firebase.init';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -19,6 +19,8 @@ const Register = () => {
   ] = useCreateUserWithEmailAndPassword(auth, {
     sendEmailVerification: true
   });
+
+  const [updateProfile, updating, updateError] = useUpdateProfile(auth);
 
   const [signInWithGoogle, googleUser, googleLoading, googleError] = useSignInWithGoogle(auth);
   const [signInWithGithub, githubUser, githubLoading, githubError] = useSignInWithGithub(auth)
@@ -81,21 +83,22 @@ const Register = () => {
 
 
   // After Successfully Register User Redirect to Home.
-  if (user || googleUser || githubUser || fbUser) {
+  if (googleUser || githubUser || fbUser) {
     navigate('/home')
     toast.success('User Created Successfully.')
   }
 
-  const handleSubmitForm = e => {
+  const handleSubmitForm = async e => {
     e.preventDefault()
     const name = e.target.name.value;
     if (name.length === 0) {
       setRegisterError({ ...registerError, name: 'Your Name Field is Empty' })
-    } else {
-      setRegisterInfo({ ...registerInfo, name: name })
-      setRegisterError('')
     }
-    createUserWithEmailAndPassword(registerInfo.email, registerInfo.password)
+
+    await createUserWithEmailAndPassword(registerInfo.email, registerInfo.password)
+    await updateProfile({ displayName: name })
+    navigate('/home')
+    toast.success('User Created Successfully.')
   }
 
   useEffect(() => {
@@ -128,7 +131,7 @@ const Register = () => {
                   <p>Create Account with Your Email & Password.</p>
                 </div>
 
-                <Form.Group className="mb-3" controlId="formGroupName">
+                <Form.Group className="mb-1" controlId="formGroupName">
                   <Form.Label>Full Name</Form.Label>
                   <Form.Control type="text" name="name" placeholder="Full Name" />
 
@@ -166,11 +169,11 @@ const Register = () => {
 
               <div className='d-flex align-items-center'>
                 <div className='w-50 bg-dark' style={{ height: '1px' }}></div>
-                <p className='p-2 mt-3'>Or</p>
+                <p className='px-2 mt-2'>Or</p>
                 <div className='w-50 bg-dark' style={{ height: '1px' }}></div>
               </div>
 
-              <Button onClick={handleGoogleSignin} variant="warning" type="submit" className='w-100'>
+              <Button onClick={handleGoogleSignin} variant="outline-dark" type="submit" className='w-100'>
                 <FcGoogle /> Login with Google
               </Button>
 
