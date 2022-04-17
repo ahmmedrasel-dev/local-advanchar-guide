@@ -5,6 +5,8 @@ import auth from '../../../firebase.init';
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { FaFacebookF } from 'react-icons/fa';
+import { FcGoogle } from 'react-icons/fc';
 
 
 const Login = () => {
@@ -105,6 +107,25 @@ const Login = () => {
               </Button>
               <ToastContainer />
               <p className='text-center mt-3'>Don't have an account? <span style={{ 'cursor': 'pointer', 'color': 'red' }} onClick={navigateRegister}>Register</span></p>
+
+              <div className='d-flex align-items-center'>
+                <div className='w-50 bg-dark' style={{ height: '1px' }}></div>
+                <p className='p-2 mt-3'>Or</p>
+                <div className='w-50 bg-dark' style={{ height: '1px' }}></div>
+              </div>
+
+              <Button variant="info" type="submit" className='w-100'>
+                Login with Google
+              </Button>
+
+              <Button variant="warning" type="submit" className='w-100 my-2'>
+                <FcGoogle /> Login with Github
+              </Button>
+
+              <Button variant="primary" type="submit" className='w-100'>
+                <FaFacebookF /> Login with Facebook
+              </Button>
+
             </Form>
           </Col>
         </Row>
