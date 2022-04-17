@@ -2,11 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import auth from '../../../firebase.init';
-import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { useSignInWithEmailAndPassword, useSignInWithFacebook, useSignInWithGithub } from 'react-firebase-hooks/auth';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FaFacebookF } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
+import { BsGithub } from 'react-icons/bs';
+import { useSignInWithGoogle } from 'react-firebase-hooks/auth';
 
 
 const Login = () => {
@@ -17,6 +19,12 @@ const Login = () => {
     loading,
     hookError,
   ] = useSignInWithEmailAndPassword(auth);
+
+  const [signInWithGoogle, googleUser, googleLoading, googleError] = useSignInWithGoogle(auth);
+  const [signInWithGithub, githubUser, githubLoading, githubError] = useSignInWithGithub(auth)
+
+  const [signInWithFacebook, fbUser, fbLoading, fbError] = useSignInWithFacebook(auth)
+
 
   const navigate = useNavigate();
 
@@ -55,10 +63,26 @@ const Login = () => {
     }
   }
 
-  if (user) {
-    toast.success('Login Successfully.')
+  if (user || googleUser || githubUser || fbUser) {
+    navigate('/home')
   }
 
+  // Login with Google
+  const handleGoogleSignin = () => {
+    signInWithGoogle(loginInfo.email, loginInfo.password)
+  }
+
+  // Login with Github.
+  const handleLoginGithub = () => {
+    signInWithGithub(loginInfo.email, loginInfo.password)
+  }
+
+  // Login with Facebook.
+  const handleSignInFb = () => {
+    signInWithFacebook(loginInfo.email, loginInfo.password)
+  }
+
+  // Sign In With Email And Password.
   const handleSubmit = e => {
     e.preventDefault();
     signInWithEmailAndPassword(loginInfo.email, loginInfo.password)
@@ -72,41 +96,54 @@ const Login = () => {
     if (hookError) {
       toast.error(hookError.message)
     }
+    if (googleError) {
+      toast.error(googleError.message)
+    }
 
-  }, [hookError])
+    if (githubError) {
+      toast.error(githubError.message)
+    }
+
+    if (fbError) {
+      toast.error(fbError.message)
+    }
+
+  }, [hookError, googleError, githubError, fbError])
 
   return (
     <section className='my-5'>
       <Container>
         <Row>
           <Col md={{ span: 6, offset: 3 }}>
-            <Form onSubmit={handleSubmit} className='border p-5 rounded-3'>
-              <div className='text-center'>
-                <h3>Please Login</h3>
-                <p>Login with Your Email & Password.</p>
-              </div>
-              <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Label>Email address</Form.Label>
-                <Form.Control type="email" onChange={handleEmail} placeholder="Enter email" required />
+            <div className='border p-5 rounded-3'>
+              <Form onSubmit={handleSubmit}>
+                <div className='text-center'>
+                  <h3>Please Login</h3>
+                  <p>Login with Your Email & Password.</p>
+                </div>
+                <Form.Group className="mb-3" controlId="formBasicEmail">
+                  <Form.Label>Email address</Form.Label>
+                  <Form.Control type="email" onChange={handleEmail} placeholder="Enter email" required />
 
-                {
-                  loginError?.email && <strong className='text-danger'>{loginError.email}</strong>
-                }
-              </Form.Group>
+                  {
+                    loginError?.email && <strong className='text-danger'>{loginError.email}</strong>
+                  }
+                </Form.Group>
 
-              <Form.Group className="mb-3" controlId="formBasicPassword">
-                <Form.Label>Password</Form.Label>
-                <Form.Control type="password" onChange={handlePassword} placeholder="Password" required />
+                <Form.Group className="mb-3" controlId="formBasicPassword">
+                  <Form.Label>Password</Form.Label>
+                  <Form.Control type="password" onChange={handlePassword} placeholder="Password" required />
 
-                {
-                  loginError?.password && <strong className='text-danger'>{loginError.password}</strong>
-                }
-              </Form.Group>
-              <Button variant="primary" type="submit" className='w-100'>
-                Submit
-              </Button>
-              <ToastContainer />
-              <p className='text-center mt-3'>Don't have an account? <span style={{ 'cursor': 'pointer', 'color': 'red' }} onClick={navigateRegister}>Register</span></p>
+                  {
+                    loginError?.password && <strong className='text-danger'>{loginError.password}</strong>
+                  }
+                </Form.Group>
+                <Button variant="primary" type="submit" className='w-100'>
+                  Login
+                </Button>
+                <ToastContainer />
+                <p className='text-center mt-3'>Don't have an account? <span style={{ 'cursor': 'pointer', 'color': 'red' }} onClick={navigateRegister}>Register</span></p>
+              </Form>
 
               <div className='d-flex align-items-center'>
                 <div className='w-50 bg-dark' style={{ height: '1px' }}></div>
@@ -114,19 +151,18 @@ const Login = () => {
                 <div className='w-50 bg-dark' style={{ height: '1px' }}></div>
               </div>
 
-              <Button variant="info" type="submit" className='w-100'>
-                Login with Google
+              <Button onClick={handleGoogleSignin} variant="warning" type="submit" className='w-100'>
+                <FcGoogle /> Login with Google
               </Button>
 
-              <Button variant="warning" type="submit" className='w-100 my-2'>
-                <FcGoogle /> Login with Github
+              <Button onClick={handleLoginGithub} variant="dark" type="submit" className='w-100 my-2'>
+                <BsGithub /> Login with Github
               </Button>
 
-              <Button variant="primary" type="submit" className='w-100'>
+              <Button variant="primary" type="submit" onClick={handleSignInFb} className='w-100'>
                 <FaFacebookF /> Login with Facebook
               </Button>
-
-            </Form>
+            </div>
           </Col>
         </Row>
       </Container>

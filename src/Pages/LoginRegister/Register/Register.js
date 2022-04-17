@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
-import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { useCreateUserWithEmailAndPassword, useSignInWithFacebook, useSignInWithGithub, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import auth from '../../../firebase.init';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { FcGoogle } from 'react-icons/fc';
+import { FaFacebookF } from 'react-icons/fa';
+import { BsGithub } from 'react-icons/bs';
 
 const Register = () => {
   const navigate = useNavigate()
@@ -16,6 +19,11 @@ const Register = () => {
   ] = useCreateUserWithEmailAndPassword(auth, {
     sendEmailVerification: true
   });
+
+  const [signInWithGoogle, googleUser, googleLoading, googleError] = useSignInWithGoogle(auth);
+  const [signInWithGithub, githubUser, githubLoading, githubError] = useSignInWithGithub(auth)
+
+  const [signInWithFacebook, fbUser, fbLoading, fbError] = useSignInWithFacebook(auth)
 
   const [registerInfo, setRegisterInfo] = useState({
     name: '',
@@ -43,6 +51,22 @@ const Register = () => {
     }
   }
 
+  // Login with Google
+  const handleGoogleSignin = () => {
+    signInWithGoogle(registerInfo.email, registerInfo.password)
+  }
+
+  // Login with Github.
+  const handleLoginGithub = () => {
+    signInWithGithub(registerInfo.email, registerInfo.password)
+  }
+
+  // Login with Facebook.
+  const handleSignInFb = () => {
+    signInWithFacebook(registerInfo.email, registerInfo.password)
+  }
+
+
   const handlePassword = e => {
     const regex = /.{6,}/;
     const validPassword = regex.test(e.target.value);
@@ -57,7 +81,7 @@ const Register = () => {
 
 
   // After Successfully Register User Redirect to Home.
-  if (user) {
+  if (user || googleUser || githubUser || fbUser) {
     navigate('/home')
     toast.success('User Created Successfully.')
   }
@@ -76,58 +100,89 @@ const Register = () => {
 
   useEffect(() => {
     if (hookError) {
-      toast.error(hookError?.message)
+      toast.error(hookError.message)
     }
-  }, [hookError])
+    if (googleError) {
+      toast.error(googleError.message)
+    }
+
+    if (githubError) {
+      toast.error(githubError.message)
+    }
+
+    if (fbError) {
+      toast.error(fbError.message)
+    }
+
+  }, [hookError, googleError, githubError, fbError])
 
   return (
     <section className='my-5'>
       <Container>
         <Row>
           <Col md={{ span: 6, offset: 3 }}>
-            <Form onSubmit={handleSubmitForm} className='border p-5 rounded-3'>
-              <div className='text-center'>
-                <h3>Register</h3>
-                <p>Create Account with Your Email & Password.</p>
+            <div className='border p-5 rounded-3'>
+              <Form onSubmit={handleSubmitForm}>
+                <div className='text-center'>
+                  <h3>Register</h3>
+                  <p>Create Account with Your Email & Password.</p>
+                </div>
+
+                <Form.Group className="mb-3" controlId="formGroupName">
+                  <Form.Label>Full Name</Form.Label>
+                  <Form.Control type="text" name="name" placeholder="Full Name" />
+
+                  {
+                    registerError?.name && <strong className='text-danger'>{registerError.name}</strong>
+                  }
+                </Form.Group>
+
+                <Form.Group className="mb-3" controlId="formGroupEmail">
+                  <Form.Label>Email address</Form.Label>
+                  <Form.Control type="email" name="email" onChange={handleEmail} placeholder="Enter email" />
+                  {
+                    registerError?.email && <strong className='text-danger'>{registerError.email}</strong>
+                  }
+
+                </Form.Group>
+
+                <ToastContainer />
+
+                <Form.Group className="mb-3" controlId="formGroupPassword">
+                  <Form.Label>Password</Form.Label>
+                  <Form.Control type="password" name="password" onChange={handlePassword} placeholder="Password" />
+
+                  {
+                    registerError?.password && <strong className='text-danger'>{registerError.password}</strong>
+                  }
+                </Form.Group>
+
+                <Button variant="primary" type="submit" className='w-100'>
+                  Register
+                </Button>
+
+                <p className='text-center mt-3'>Already have an account? <Link style={{ 'cursor': 'pointer', 'color': 'red' }} to='/login'>Login</Link></p>
+              </Form>
+
+              <div className='d-flex align-items-center'>
+                <div className='w-50 bg-dark' style={{ height: '1px' }}></div>
+                <p className='p-2 mt-3'>Or</p>
+                <div className='w-50 bg-dark' style={{ height: '1px' }}></div>
               </div>
 
-              <Form.Group className="mb-3" controlId="formGroupName">
-                <Form.Label>Full Name</Form.Label>
-                <Form.Control type="text" name="name" placeholder="Full Name" />
-
-                {
-                  registerError?.name && <strong className='text-danger'>{registerError.name}</strong>
-                }
-              </Form.Group>
-
-              <Form.Group className="mb-3" controlId="formGroupEmail">
-                <Form.Label>Email address</Form.Label>
-                <Form.Control type="email" name="email" onChange={handleEmail} placeholder="Enter email" />
-                {
-                  registerError?.email && <strong className='text-danger'>{registerError.email}</strong>
-                }
-
-              </Form.Group>
-
-              <ToastContainer />
-
-              <Form.Group className="mb-3" controlId="formGroupPassword">
-                <Form.Label>Password</Form.Label>
-                <Form.Control type="password" name="password" onChange={handlePassword} placeholder="Password" />
-
-                {
-                  registerError?.password && <strong className='text-danger'>{registerError.password}</strong>
-                }
-              </Form.Group>
-
-              <Button variant="primary" type="submit">
-                Register
+              <Button onClick={handleGoogleSignin} variant="warning" type="submit" className='w-100'>
+                <FcGoogle /> Login with Google
               </Button>
 
-              <p className='text-center mt-3'>Already have an account? <Link style={{ 'cursor': 'pointer', 'color': 'red' }} to='/login'>Login</Link></p>
-            </Form>
+              <Button onClick={handleLoginGithub} variant="dark" type="submit" className='w-100 my-2'>
+                <BsGithub /> Login with Github
+              </Button>
 
+              <Button variant="primary" type="submit" onClick={handleSignInFb} className='w-100'>
+                <FaFacebookF /> Login with Facebook
+              </Button>
 
+            </div>
           </Col>
         </Row>
 
