@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import auth from '../../../firebase.init';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Register = () => {
   const navigate = useNavigate()
@@ -10,8 +12,10 @@ const Register = () => {
     createUserWithEmailAndPassword,
     user,
     loading,
-    error,
-  ] = useCreateUserWithEmailAndPassword(auth);
+    hookError,
+  ] = useCreateUserWithEmailAndPassword(auth, {
+    sendEmailVerification: true
+  });
 
   const [registerInfo, setRegisterInfo] = useState({
     name: '',
@@ -52,9 +56,13 @@ const Register = () => {
   }
 
 
+  // After Successfully Register User Redirect to Home.
   if (user) {
+    toast('Registration Successfully Done!')
     navigate('/home')
+
   }
+
   const handleSubmitForm = e => {
     e.preventDefault()
     const name = e.target.name.value;
@@ -64,10 +72,14 @@ const Register = () => {
       setRegisterInfo({ ...registerInfo, name: name })
       setRegisterError('')
     }
-    createUserWithEmailAndPassword(registerInfo.email, registerInfo.password, {
-      sendEmailVerification: true
-    })
+    createUserWithEmailAndPassword(registerInfo.email, registerInfo.password)
   }
+
+  useEffect(() => {
+    if (hookError) {
+      toast(hookError?.message)
+    }
+  }, [hookError])
 
   return (
     <section className='my-5'>
@@ -98,6 +110,7 @@ const Register = () => {
 
               </Form.Group>
 
+              <ToastContainer />
 
               <Form.Group className="mb-3" controlId="formGroupPassword">
                 <Form.Label>Password</Form.Label>
@@ -114,6 +127,8 @@ const Register = () => {
 
               <p className='text-center mt-3'>Already have an account? <Link style={{ 'cursor': 'pointer', 'color': 'red' }} to='/login'>Login</Link></p>
             </Form>
+
+
           </Col>
         </Row>
 
