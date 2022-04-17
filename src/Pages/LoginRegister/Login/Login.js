@@ -40,7 +40,6 @@ const Login = () => {
               <Button variant="primary" type="submit" className='w-100'>
                 Submit
               </Button>
-
               <p className='text-center mt-3'>Don't have an account? <span style={{ 'cursor': 'pointer', 'color': 'red' }} onClick={navigateRegister}>Register</span></p>
             </Form>
           </Col>
