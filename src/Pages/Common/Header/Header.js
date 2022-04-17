@@ -4,6 +4,7 @@ import { Button, Container, Nav, Navbar } from 'react-bootstrap';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link } from 'react-router-dom';
 import auth from '../../../firebase.init';
+import { FaLocationArrow } from 'react-icons/fa';
 
 const Header = () => {
   const [user] = useAuthState(auth)
@@ -15,7 +16,7 @@ const Header = () => {
   return (
     <Navbar bg="light" expand="lg" sticky='top'>
       <Container>
-        <Navbar.Brand as={Link} to='/'>Local Advancer Guide</Navbar.Brand>
+        <Navbar.Brand as={Link} to='/'> <FaLocationArrow /> <span className='text-danger'>Local Adventure Guide</span></Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav

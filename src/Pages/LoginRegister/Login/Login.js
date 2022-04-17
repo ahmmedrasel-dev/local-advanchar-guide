@@ -54,7 +54,7 @@ const Login = () => {
   }
 
   if (user) {
-    navigate('/home')
+    toast.success('Login Successfully.')
   }
 
   const handleSubmit = e => {
@@ -86,11 +86,19 @@ const Login = () => {
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Email address</Form.Label>
                 <Form.Control type="email" onChange={handleEmail} placeholder="Enter email" required />
+
+                {
+                  loginError?.email && <strong className='text-danger'>{loginError.email}</strong>
+                }
               </Form.Group>
 
               <Form.Group className="mb-3" controlId="formBasicPassword">
                 <Form.Label>Password</Form.Label>
                 <Form.Control type="password" onChange={handlePassword} placeholder="Password" required />
+
+                {
+                  loginError?.password && <strong className='text-danger'>{loginError.password}</strong>
+                }
               </Form.Group>
               <Button variant="primary" type="submit" className='w-100'>
                 Submit

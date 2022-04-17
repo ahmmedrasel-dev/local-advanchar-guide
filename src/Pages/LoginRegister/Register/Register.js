@@ -58,9 +58,8 @@ const Register = () => {
 
   // After Successfully Register User Redirect to Home.
   if (user) {
-    toast('Registration Successfully Done!')
     navigate('/home')
-
+    toast.success('User Created Successfully.')
   }
 
   const handleSubmitForm = e => {
@@ -77,7 +76,7 @@ const Register = () => {
 
   useEffect(() => {
     if (hookError) {
-      toast(hookError?.message)
+      toast.error(hookError?.message)
     }
   }, [hookError])
 
