@@ -4,41 +4,41 @@
     "picture": "https://i.ibb.co/GkTkSVZ/river.png",
     "price": 228,
     "services": "River guides",
-    "description": "323 Concord Street, Brutus, New Mexico, 5407"
+    "description": "Trips can last from a few hours to multiple weeks"
   },
   {
     "id": "625ac373c1a701c2de8bc944",
     "picture": "https://i.ibb.co/xD4KNt9/climing.png",
     "price": 423,
     "services": "Climbing guides",
-    "description": "745 Hazel Court, Coultervillle, Arizona, 8493"
+    "description": "Provide guide with equipment to climb safely in an area"
   },
   {
     "id": "625ac373d0be496a6ee5c97b",
     "picture": "https://i.ibb.co/9nVGKv3/hiking.png",
     "price": 236,
     "services": "Hiking guides",
-    "description": "180 Mayfair Drive, Cressey, Idaho, 7326"
+    "description": "Help tourists navigate difficult terrain like glaciers, mountain passe."
   },
   {
     "id": "625ac373d24a6b6fa66114af",
     "picture": "https://i.ibb.co/p42Lz8N/snowball.png",
     "price": 123,
     "services": "Snowmobile guides",
-    "description": "175 Grand Street, Glasgow, Nevada, 5817"
+    "description": "Assist guests by providing snowmobiles and access to snowmobiling areas."
   },
   {
     "id": "625ac37378a704384d51b1ce",
     "picture": "https://i.ibb.co/zfqxzQv/fising.png",
     "price": 260,
     "services": "Fishing guides",
-    "description": "437 Whitty Lane, Succasunna, Wyoming, 1462"
+    "description": "Assist guests with instructional help, supplies and fish cleaning."
   },
   {
     "id": "625ac3730fd37223addf9e30",
     "picture": "https://i.ibb.co/1XjV1g7/nature.png",
     "price": 230,
     "services": "Nature guide",
-    "description": "884 Roebling Street, Rosburg, Rhode Island, 939"
+    "description": "Usually guide tourists through outdoor areas of interest."
   }
 ]
