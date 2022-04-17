@@ -34,8 +34,8 @@ const Header = () => {
                 :
                 <Nav.Link as={Link} to="/login">Login</Nav.Link>
             }
-
           </Nav>
+          <span>{user?.email}</span>
         </Navbar.Collapse>
       </Container>
     </Navbar>

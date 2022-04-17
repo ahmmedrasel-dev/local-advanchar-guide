@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Col, Container, Form, Row } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../../firebase.init';
 import { useSignInWithEmailAndPassword, useSignInWithFacebook, useSignInWithGithub } from 'react-firebase-hooks/auth';
 import { ToastContainer, toast } from 'react-toastify';
@@ -25,8 +25,10 @@ const Login = () => {
 
   const [signInWithFacebook, fbUser, fbLoading, fbError] = useSignInWithFacebook(auth)
 
-
   const navigate = useNavigate();
+  const location = useLocation();
+
+  let from = location.state?.from?.pathname || "/";
 
   const [loginInfo, setLoginInfo] = useState({
     email: '',
@@ -64,7 +66,7 @@ const Login = () => {
   }
 
   if (user || googleUser || githubUser || fbUser) {
-    navigate('/home')
+    navigate(from, { replace: true });
   }
 
   // Login with Google
