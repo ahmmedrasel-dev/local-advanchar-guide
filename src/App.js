@@ -17,6 +17,7 @@ import Blogs from './Pages/Home/Blogs/Blogs';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import ClientFeedback from './Pages/Home/ClientFeedback/ClientFeedback';
+import ThankYou from './Pages/Common/ThankYou/ThankYou';
 
 function App() {
   return (
@@ -37,6 +38,11 @@ function App() {
         <Route path='/register' element={<Register></Register>}></Route>
         <Route path='/review' element={<ClientFeedback></ClientFeedback>}></Route>
         <Route path='/reset-password' element={<PasswordReset></PasswordReset>}></Route>
+        <Route path='/thank-you' element={
+          <RequiredAuth>
+            <ThankYou></ThankYou>
+          </RequiredAuth>
+        }></Route>
         <Route path='*' element={<Notfound></Notfound>}></Route>
       </Routes>
       <ToastContainer />

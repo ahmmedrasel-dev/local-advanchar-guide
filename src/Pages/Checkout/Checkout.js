@@ -1,15 +1,25 @@
 import React from 'react';
 import { Row, Col, Form, Button, Container } from 'react-bootstrap';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { ToastContainer } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
+import { toast, ToastContainer } from 'react-toastify';
 import auth from '../../firebase.init';
 import useBooking from '../../Hooks/useBooking';
 import useServices from '../../Hooks/useServices';
+import { deleteShoppingCart } from '../../utilities/fakedb';
 
 const Checkout = () => {
+  const navigate = useNavigate()
   const [user] = useAuthState(auth)
   const [services, setServices] = useServices()
   const [booking, setBooking] = useBooking(services)
+
+  const navigateThankyou = () => {
+    navigate('/thank-you')
+    toast.success('Your Booking is Confirm.')
+    setBooking('')
+    deleteShoppingCart()
+  }
   return (
     <section className='my-5' style={{ height: '70vh' }}>
       <Container>
@@ -64,7 +74,7 @@ const Checkout = () => {
                 })
               }
 
-              <Button variant={'warning'} className="w-100">Order Confirm</Button>
+              <Button variant={'warning'} onClick={navigateThankyou} className="w-100">Booking Confirm</Button>
             </div>
           </Col>
         </Row>

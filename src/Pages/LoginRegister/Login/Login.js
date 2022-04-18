@@ -3,7 +3,7 @@ import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 import { useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../../firebase.init';
 import { useSignInWithEmailAndPassword, useSignInWithFacebook, useSignInWithGithub } from 'react-firebase-hooks/auth';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FaFacebookF } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
@@ -67,6 +67,7 @@ const Login = () => {
 
   if (user || googleUser || githubUser || fbUser) {
     navigate(from, { replace: true });
+    toast.success('Successfully Login.')
   }
 
   // Login with Google

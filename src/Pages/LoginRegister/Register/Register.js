@@ -149,8 +149,6 @@ const Register = () => {
 
                 </Form.Group>
 
-                <ToastContainer />
-
                 <Form.Group className="mb-3" controlId="formGroupPassword">
                   <Form.Label>Password</Form.Label>
                   <Form.Control type="password" name="password" onChange={handlePassword} placeholder="Password" />
