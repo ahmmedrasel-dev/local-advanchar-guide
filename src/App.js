@@ -13,6 +13,7 @@ import Footer from './Pages/Common/Footer/Footer';
 import RequiredAuth from './Pages/RequireAuth/RequireAuth';
 import { ToastContainer } from 'react-toastify';
 import PasswordReset from './Pages/LoginRegister/PasswordReset/PasswordReset';
+import Blogs from './Pages/Home/Blogs/Blogs';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
           </RequiredAuth>
         }></Route>
         <Route path='/login' element={<Login></Login>}></Route>
+        <Route path='/blogs' element={<Blogs></Blogs>}></Route>
         <Route path='/register' element={<Register></Register>}></Route>
         <Route path='/reset-password' element={<PasswordReset></PasswordReset>}></Route>
         <Route path='*' element={<Notfound></Notfound>}></Route>

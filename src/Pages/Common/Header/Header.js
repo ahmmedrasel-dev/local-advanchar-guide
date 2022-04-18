@@ -18,7 +18,7 @@ const Header = () => {
   return (
     <Navbar bg="light" expand="lg" sticky='top'>
       <Container>
-        <Navbar.Brand as={Link} to='/'> <FaLocationArrow /> <span className='text-danger'>Local Adventure Guide</span></Navbar.Brand>
+        <Navbar.Brand as={Link} to='/'> <FaLocationArrow /> <span style={{ 'color': "#2f92eb" }}>Local Adventure Guide</span></Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav
@@ -29,6 +29,7 @@ const Header = () => {
             <CustomLink className="nav-link" to='/'>Home</CustomLink>
             <CustomLink className="nav-link" to='/services'>Service</CustomLink>
             <CustomLink className="nav-link" to='/about'>About</CustomLink>
+            <CustomLink className="nav-link" to='/blogs'>Blog</CustomLink>
             <CustomLink className="nav-link" to='/checkout'>Checkout</CustomLink>
 
             {

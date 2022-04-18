@@ -34,7 +34,7 @@ const Services = () => {
     <section id="services" className='my-5' >
       <Container>
         <Row>
-          <h2 className='text-center mb-5 text-uppercase'>Services</h2>
+          <h2 className='text-center mb-5 text-uppercase' style={{ 'color': '#2f92eb' }}>Services</h2>
           <ToastContainer />
           {
             services.map(item => <ServicesItem
