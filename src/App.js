@@ -14,6 +14,9 @@ import RequiredAuth from './Pages/RequireAuth/RequireAuth';
 import { ToastContainer } from 'react-toastify';
 import PasswordReset from './Pages/LoginRegister/PasswordReset/PasswordReset';
 import Blogs from './Pages/Home/Blogs/Blogs';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import ClientFeedback from './Pages/Home/ClientFeedback/ClientFeedback';
 
 function App() {
   return (
@@ -32,6 +35,7 @@ function App() {
         <Route path='/login' element={<Login></Login>}></Route>
         <Route path='/blogs' element={<Blogs></Blogs>}></Route>
         <Route path='/register' element={<Register></Register>}></Route>
+        <Route path='/review' element={<ClientFeedback></ClientFeedback>}></Route>
         <Route path='/reset-password' element={<PasswordReset></PasswordReset>}></Route>
         <Route path='*' element={<Notfound></Notfound>}></Route>
       </Routes>
