@@ -143,8 +143,11 @@ const Login = () => {
                 <Button variant="primary" type="submit" className='w-100'>
                   Login
                 </Button>
-                <ToastContainer />
-                <p className='text-center mt-3'>Don't have an account? <span style={{ 'cursor': 'pointer', 'color': 'red' }} onClick={navigateRegister}>Register</span></p>
+                <div className='d-flex justify-content-between align-items-center mt-3'>
+                  <p>Don't have an account? <span style={{ 'cursor': 'pointer', 'color': 'red' }} onClick={navigateRegister}>Register</span></p>
+
+                  <p style={{ 'cursor': 'pointer', 'color': 'red' }} onClick={() => navigate('/reset-password')}>Forget Password?</p>
+                </div>
               </Form>
 
               <div className='d-flex align-items-center'>

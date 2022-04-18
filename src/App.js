@@ -12,6 +12,7 @@ import Header from './Pages/Common/Header/Header';
 import Footer from './Pages/Common/Footer/Footer';
 import RequiredAuth from './Pages/RequireAuth/RequireAuth';
 import { ToastContainer } from 'react-toastify';
+import PasswordReset from './Pages/LoginRegister/PasswordReset/PasswordReset';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
         }></Route>
         <Route path='/login' element={<Login></Login>}></Route>
         <Route path='/register' element={<Register></Register>}></Route>
+        <Route path='/reset-password' element={<PasswordReset></PasswordReset>}></Route>
         <Route path='*' element={<Notfound></Notfound>}></Route>
       </Routes>
       <ToastContainer />

@@ -11,7 +11,9 @@ To See Live Website: [Visit-Live-Link](https://local-advancer-guide.web.app/).
 -  In Banner use Carousel Slider.
 -  Mobile Responsive.
 -  Email Verification When user Register.
+-  User Can Rest Password By Email
 -  Privet Route user can't access without login.
+-  LocalStorage Data Store.
 
 ### Technology Used:
 

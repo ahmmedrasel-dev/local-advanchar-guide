@@ -5,6 +5,8 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link } from 'react-router-dom';
 import auth from '../../../firebase.init';
 import { FaLocationArrow } from 'react-icons/fa';
+import CustomLink from '../CustomLink/CustomLink';
+import './Header.css'
 
 const Header = () => {
   const [user] = useAuthState(auth)
@@ -24,10 +26,11 @@ const Header = () => {
             style={{ maxHeight: '100px' }}
             navbarScroll
           >
-            <Nav.Link as={Link} to="/">Home</Nav.Link>
-            <Nav.Link href="home#services">Services</Nav.Link>
-            <Nav.Link as={Link} to="/about">About</Nav.Link>
-            <Nav.Link as={Link} to="/checkout">Checkout</Nav.Link>
+            <CustomLink className="nav-link" to='/'>Home</CustomLink>
+            <CustomLink className="nav-link" to='/services'>Service</CustomLink>
+            <CustomLink className="nav-link" to='/about'>About</CustomLink>
+            <CustomLink className="nav-link" to='/checkout'>Checkout</CustomLink>
+
             {
               user ?
                 <NavDropdown title="Logout" id="basic-nav-dropdown">

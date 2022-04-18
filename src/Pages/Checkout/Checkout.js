@@ -58,7 +58,7 @@ const Checkout = () => {
                   return (
                     <div className='bg-light p-2 m-2 shadow-sm rounded-3'>
                       <h3 key={item.id}>{item.services}</h3>
-                      <strong>Booking Price: ${item.price}</strong>
+                      <strong key={item.id}>Booking Price: ${item.price}</strong>
                     </div>
                   )
                 })
